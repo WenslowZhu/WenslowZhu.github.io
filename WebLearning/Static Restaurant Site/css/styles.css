@@ -82,9 +82,64 @@ body {
     padding-bottom: 0;
 }
 
-/* *We Deliver 文字属性*/
+/* *We Deliver 文字属性 */
 #phone div {
     color: #557c3e;
     text-align: right;
     padding-right: 15px;
+}
+
+/* 设置抽屉按钮的边框 */
+.navbar-header button.navbar-toggle, .navbar-header .icon-bar {
+    border: 1px solid #61122f;
+}
+
+/* 由于设置float属性, box元素会折叠到最小高度 */
+.navbar-header button.navbar-toggle {
+    clear: both;
+    margin-top: -30px;
+}
+
+/*********** 大尺寸设备 *************/
+@media (min-width: 1200px) {
+
+}
+
+/*********** 中等尺寸设备 ***********/
+@media (min-width: 992px) and (max-width: 1199px) {
+    /* 缩小logo的尺寸 */
+    #logo-img {
+        background: url("../images/restaurant-logo_medium.png") no-repeat;
+        width: 100px;
+        height: 100px;
+        margin: 5px 5px 5px 0;
+    }
+}
+
+/*********** 小尺寸设备 ***********/
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/*********** 最小尺寸设备 ***********/
+@media (max-width: 767px) {
+    /* 修复最小尺寸时的layout问题 */
+    .navbar-brand {
+        padding-top: 10px;
+        height: 80px;
+    }
+    /* 饭店名字 */
+    .navbar-brand h1 {
+        padding-top: 10px;
+        font-size: 5vw; /* 1vw = 1% of viewport width */
+    }
+    /* Kosher certitied */
+    .navbar-brand p {
+        font-size: .6em;
+        margin-top: 12px;
+    }
+    /* Stat-K */
+    .navbar-brand p img {
+        height: 20px;
+    }
 }
