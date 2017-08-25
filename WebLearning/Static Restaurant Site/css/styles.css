@@ -5,9 +5,86 @@ body {
     font-family: 'Oxygen', sans-serif;
 }
 
-#top, #bottom {
-    width: 200px;
-    height: 200px;
-    background-color: maroon;
-    border: 1px solid red;
+/* 导航栏的样式 */
+#header-nav {
+    background-color: #f6b319;
+    /* 取消圆角 */
+    border-radius: 0;
+    border: 0;
+}
+
+#logo-img {
+    background: url("../images/restaurant-logo_large.png") no-repeat;
+    width: 150px;
+    height:150px;
+    margin: 10px 15px 10px 0px;
+}
+
+/* 品牌logo */
+.navbar-brand {
+    padding-top: 25px;
+}
+
+.navbar-brand h1 {
+    font-family: 'Lora', serif;
+    color: #557c3e;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #222;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    line-height: 0.75;
+}
+
+/* 取消鼠标悬停时的下划线 */
+.navbar-brand a:hover, .navbar-brand a:focus {
+    text-decoration: none;
+}
+
+/* 品牌下方的副标题 */
+.navbar-brand p {
+    color: #000;
+    text-transform: uppercase;
+    font-size: .7em;
+    margin-top: 15px;
+}
+
+/* 垂直居中 */
+.navbar-brand p span {
+    vertical-align: middle;
+}
+
+#nav-list {
+    margin-top: 10px;
+}
+
+/* 居中 */
+#nav-list a {
+    color: #951c49;
+    text-align: center;
+}
+
+#nav-list a:hover {
+    background: #e7e7e7;
+}
+
+#nav-list a span {
+    font-size: 1.8em;
+}
+
+#phone {
+    margin-top: 5px;
+}
+
+#phone a {
+    text-align: right;
+    padding-bottom: 0;
+}
+
+/* *We Deliver 文字属性*/
+#phone div {
+    color: #557c3e;
+    text-align: right;
+    padding-right: 15px;
 }
