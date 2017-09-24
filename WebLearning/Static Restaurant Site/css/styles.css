@@ -5,6 +5,8 @@ body {
     font-family: 'Oxygen', sans-serif;
 }
 
+/** HEADER **/
+
 /* 导航栏的样式 */
 #header-nav {
     background-color: #f6b319;
@@ -100,9 +102,23 @@ body {
     margin-top: -30px;
 }
 
+/* END HEADER */
+
+/* HOME PAGE */
+.container .jumbotron {
+    box-shadow: 0 0 50px #3F0C1F;
+    border: 2px solid #3F0C1F;
+}
+
 /*********** 大尺寸设备 *************/
 @media (min-width: 1200px) {
-
+    /* jumbotron图片的样式 */
+    .jumbotron {
+        background: url("../images/jumbotron_1200.jpg") no-repeat;
+        height: 675px;
+        box-shadow: 0 0 50px #3F0C1F;
+        border: 2px solid #3F0C1F;
+    }
 }
 
 /*********** 中等尺寸设备 ***********/
@@ -114,11 +130,25 @@ body {
         height: 100px;
         margin: 5px 5px 5px 0;
     }
+
+    /* jumbotron图片的样式 */
+    .jumbotron {
+        background: url("../images/jumbotron_992.jpg") no-repeat;
+        height: 558px;
+        box-shadow: 0 0 50px #3F0C1F;
+        border: 2px solid #3F0C1F;
+    }
 }
 
 /*********** 小尺寸设备 ***********/
 @media (min-width: 768px) and (max-width: 991px) {
-
+    /* jumbotron图片的样式 */
+    .jumbotron {
+        background: url("../images/jumbotron_768.jpg") no-repeat;
+        height: 432px;
+        box-shadow: 0 0 50px #3F0C1F;
+        border: 2px solid #3F0C1F;
+    }
 }
 
 /*********** 最小尺寸设备 ***********/
@@ -141,5 +171,42 @@ body {
     /* Stat-K */
     .navbar-brand p img {
         height: 20px;
+    }
+    /* 加大抽屉按钮的字体大小 */
+    #collapsable-nav a {
+        font-size: 1.2em;
+    }
+
+    /* 让抽屉里ICON大小继承自上一步文字的大小 */
+    #collapsable-nav a  span {
+        font-size: 1em;
+        margin-right: 5px;
+    }
+
+    /* 电话号码按钮的样式 */
+    #call-btn > a {
+        font-size: 1.5em;
+        display: block;
+        margin: 0 20px;
+        padding: 10px;
+        border: 2px solid #fff;
+        background-color: #f6b319;
+        color: #951c49;
+    }
+
+    /* *WE DELIVER Title 的样式 */
+    #xs-deliver {
+        margin-top: 5px;
+        font-size: .7em;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+
+    /* jumbotron图片的样式 */
+    .container .jumbotron {
+        margin-top: 30px;
+        padding: 0;
+        box-shadow: 0 0 50px #3F0C1F;
+        border: 2px solid #3F0C1F;
     }
 }
