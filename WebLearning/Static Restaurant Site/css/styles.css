@@ -175,8 +175,36 @@ body {
     color: #fff;
     opacity: 0.8;
 }
-
 /* END HOME PAGE */
+
+/* MENU CATEGORIES PAGE */
+.category-title {
+    position: relative;
+    border: 2px solid #3F0C1F;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 15px;
+}
+.category-title span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    background-color: #000;
+    color: #fff;
+    opacity: 0.8;
+}
+.category-title:hover {
+    box-shadow: 0 1px 5px 1px #cccccc;
+}
+
+#menu-categories-title + div {
+    margin-bottom: 50px;
+}
 
 /*********** 大尺寸设备 *************/
 @media (min-width: 1200px) {
@@ -312,5 +340,15 @@ body {
     #menu-tile, #specials-tile {
         width: 280px;
         margin: 0 auto 15px;
+    }
+
+    /* 模拟Bootstrap */
+    .col-xxs-12 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+        float: left;
+        width: 100%;
     }
 }
