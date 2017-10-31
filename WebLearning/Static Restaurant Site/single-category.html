@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
 </head>
 <body>
-<!-- 添加导航栏 -->
-<header>
+    <!-- 添加导航栏 -->
+    <header>
     <nav id="header-nav" class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -42,7 +42,7 @@
             <!-- 在抽屉中展示的按钮 -->
             <div id="collapsable-nav" class="collapse navbar-collapse">
                 <ul id="nav-list" class="nav navbar-nav navbar-right">
-                    <li class="active">
+                    <li>
                         <a href="menu-categories.html">
                             <span class="glyphicon glyphicon-cutlery"></span>
                             <br class="hidden-xs">Menu
@@ -73,107 +73,61 @@
     </nav>
 </header>
 
-<!-- 在xs布局下显示的电话按钮 -->
-<div id="call-btn" class="visible-xs">
+    <!-- 在xs布局下显示的电话按钮 -->
+    <div id="call-btn" class="visible-xs">
     <a class="btn" href="tel:410-602-5008">
         <span class="glyphicon glyphicon-earphone"></span>
         410-602-5008
     </a>
 </div>
 
-<!-- 在xs布局下显示标题 -->
-<div id="xs-deliver" class="text-center visible-xs">* We Deliver</div>
+    <!-- 在xs布局下显示标题 -->
+    <div id="xs-deliver" class="text-center visible-xs">* We Deliver</div>
 
-<div id="main-content" class="container">
-    <h2 id="menu-categories-title" class="text-center">Menu Categories</h2>
-    <div class="text-center">
-        Substituting white rice with brown rice or fired rice after 3:00pm will be $1.50 for a pint and $2,50 for a quart.
-    </div>
-    <section class="row">
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-            <a href="single-category.html">
-                <div class="category-title">
-                    <img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">
-                    <span>Lunch</span>
-                </div>
-            </a>
-        </div>
-        <!--<div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">-->
-            <!--<a href="single-category.html">-->
-                <!--<div class="category-title">-->
-                    <!--<img width="200" height="200" src="images/menu/B/B.jpg" alt="Lunch">-->
-                    <!--<span>Lunch</span>-->
-                <!--</div>-->
-            <!--</a>-->
-        <!--</div>-->
-    </section>
-</div><!-- End of #main-content -->
+    <div id="main-content" class="container">
+        <h2 id="menu-categories-title" class="text-center">Lunch Menu</h2>
+        <div class="text-center">Lunch is not served until after 1pm.</div>
 
-<footer class="panel-footer">
+        <section class="row">
+            <div class="menu-item-tile col-md-6">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="menu-item-photo">
+                            <div>D01</div>
+                            <img class="img-responsive" width="250" height="150" src="images/menu/B/B-1.jpg" alt="Item">
+                        </div>
+                        <div class="menu-item-price">$10.95<span> (pint)</span>$14.95 <span>(quart)</span>
+                        </div>
+                    </div>
+                    <div class="menu-item-description col-sm-7">
+                        <h3 class="menu-item-title">Veal with Mixed Vegetables</h3>
+                        <p class="menu-item-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque inventore esse minima incidunt impedit. Asperiores, voluptatem. Sint aspernatur provident, rem odio dolorem eaque voluptatibus modi reprehenderit minima, itaque cupiditate totam.</p>
+                    </div>
+                </div>
+                <hr class="visible-xs">
+            </div>
+
+            <div class="menu-item-tile col-md-6">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="menu-item-photo">
+                            <div>D02</div>
+                            <img class="img-responsive" width="250" height="150" src="images/menu/B/B-2.jpg" alt="Item">
+                        </div>
+                        <div class="menu-item-price">$10.95<span> (pint)</span>$14.95 <span>(quart)</span>
+                        </div>
+                    </div>
+                    <div class="menu-item-description col-sm-7">
+                        <h3 class="menu-item-title">Veal with Mixed Vegetables</h3>
+                        <p class="menu-item-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque inventore esse minima incidunt impedit. Asperiores, voluptatem. Sint aspernatur provident, rem odio dolorem eaque voluptatibus modi reprehenderit minima, itaque cupiditate totam.</p>
+                    </div>
+                </div>
+                <hr class="visible-xs">
+            </div>
+        </section>
+    </div><!--End of Container-->
+
+    <footer class="panel-footer">
     <div class="container">
         <div class="row">
             <section id="hours" class="col-sm-4">
@@ -199,9 +153,9 @@
     </div>
 </footer>
 
-<!-- jQuery (Bootstrap JS plugins depend on it) -->
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/script.js"></script>
+    <!-- jQuery (Bootstrap JS plugins depend on it) -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
