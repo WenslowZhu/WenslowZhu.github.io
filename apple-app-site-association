@@ -2,6 +2,7 @@
    "webcredentials": {
        "apps": [    "NUP7C5F5WD.com.tz-testPassword.TestPassword",
                     "D95XHVNG2Z.com.ford.fordownerapp.torqueap",
-                    "D95XHVNG2Z.com.lincoln.clutchcn" ]
+                    "D95XHVNG2Z.com.lincoln.clutchcn" ],
+       "paths": ["/torqueap/*"]
     }
 }
