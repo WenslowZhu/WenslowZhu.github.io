@@ -1,9 +1,13 @@
 {
-   "applinks": {
+   "webcredentials": {
+       "apps": [    "D95XHVNG2Z.com.ford.fordownerapp.torqueap",
+                    "D95XHVNG2Z.com.lincoln.clutchcn" ]
+    },
+    "applinks": {
         "apps": [],
         "details": [{
             "appID": "D95XHVNG2Z.com.ford.fordownerapp.torqueap",
-            "paths": ["*", "/"]
+            "paths": ["*"]
         }]
     }
 }
