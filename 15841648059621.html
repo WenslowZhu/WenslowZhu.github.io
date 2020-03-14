@@ -1,0 +1,421 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Swift 内存管理之 weak 与 unowned - Zhu Ting Blog
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Zhu Ting Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:wenslowzhu.github.io ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Zhu Ting Blog</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Swift 内存管理之 weak 与 unowned</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2020/03/14</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p><img src="https://upload-images.jianshu.io/upload_images/1374191-d95813de95a5db93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""/></p>
+
+<p>在用 Swift 做开发时，我们可以使用 <strong>weak</strong> 或是 <strong>unowned</strong> 打破类实例和闭包的强引用循环。今天我们来聊一聊 <strong>weak</strong> 和 <strong>unowned</strong> 的相同和不同之处。</p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_0">weak</h2>
+
+<p>日常开发中，我们经常会用 <strong>weak</strong> 来标记代理或者在闭包中使用它来避免引用循环。</p>
+
+<pre><code class="language-swift">weak var delegate: SomeDelegate?
+
+lazy var someClosure: () -&gt; Void = { [weak self] in
+    guard let self = self else { retrun }
+    self.balabala
+}
+</code></pre>
+
+<p>当我们赋值给一个被标记 <strong>weak</strong> 的变量时，它的引用计数不会被改变。而且当这个弱引用变量所引用的对象被释放时，这个变量将被自动设为 <strong>nil</strong>。<strong>这也是弱引用必须被声明为 Optional 的原因。</strong></p>
+
+<h2 id="toc_1">unowned</h2>
+
+<p>和 <strong>weak</strong> 相同，<strong>unowned</strong> 也可以在不增加引用计数的前提下，引用某个类实例。</p>
+
+<pre><code class="language-swift">unowned let someInstance: SomeClass
+
+lazy var someClosure: () -&gt; Void = { [unowned self] in
+    self.balabala
+}
+</code></pre>
+
+<p>在使用 <strong>unowned</strong> 时，我们不需要将变量声明为 <strong>Optional</strong>。</p>
+
+<p>需要注意的是。对于被 <strong>unowned</strong> 标记的变量，即使它的原来引用已经被释放，它仍然会保持对被已经释放了的对象的一个 &quot;无效的&quot; 引用，它不是 <strong>Optional</strong> ，也不会被指向 <strong>nil</strong>。所以，当我们试图访问这样的 <strong>unowned</strong> 引用时，程序就会发生错误。</p>
+
+<p>我们看下边这段示例代码：</p>
+
+<pre><code class="language-swift">class SomeSingleton {
+    
+    static let share = SomeSingleton()
+    
+    func closure(closure: (() -&gt; Void)?) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            closure?()
+        }
+    }
+}
+
+class Person {
+    
+    let someSingleton = SomeSingleton.share
+    let name = &quot;Hello&quot;
+    
+    func testClosure() {
+        someSingleton.closure { [unowned self] in
+            print(self.name)
+        }
+    }
+    
+    deinit {
+        print(&quot;Person is deinited&quot;)
+    }
+}
+
+class ViewController: UIViewController {
+    
+    var person: Person?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        person = Person()
+        
+        person?.testClosure()
+        
+        person = nil
+    }
+}
+</code></pre>
+
+<p>在这里我们定义了一个单例，这个单例提供一个两秒之后触发的闭包。接着我们又在 <code>Person</code> 这个类中引用这个单例。最后，我们在 <code>ViewController</code> 中实例化一个 <code>Person</code> 对象，并在调用 <code>testClosure()</code> 方法后，将其设为 <strong>nil</strong>。</p>
+
+<p>在程序运行之后，我们观察控制台的 log。<code>person</code> 被 <code>denint</code> 后，控制台打印出了 <code>Person is deinited</code>。在两秒后，单例的闭包被触发，程序尝试访问 <code>person</code> 的 <code>name</code> 属性。由于 <code>person</code> 在此时已经是 <strong>nil</strong>，我们正在尝试读取一个已经被释放，但 <strong>unowned reference</strong> 还存在但对象。所以程序抛出了异常。</p>
+
+<pre><code class="language-text">Person is deinited
+Fatal error: Attempted to read an unowned reference but object 0x6000027b5bf0 was already deallocated2019-04-20
+</code></pre>
+
+<p>如果我们将 <code>[unowned self]</code> 替换为 <code>[weak self]</code>，再重新运行一遍程序。</p>
+
+<pre><code class="language-swift">someSingleton.closure { [weak self] in
+    print(self?.name)
+}
+</code></pre>
+
+<p>观察控制台的log。在 <code>person</code> 被设置为 <strong>nil</strong> 两秒之后，单例闭包被触发。由于我们在闭包中使用了 <strong>weak</strong>，所以程序不会出错，<code>self?.name</code> 的值为 <strong>nil</strong>。</p>
+
+<pre><code class="language-text">Person is deinited
+nil
+</code></pre>
+
+<h2 id="toc_2">weak vs. unowned</h2>
+
+<blockquote>
+<p>Define a capture in a closure as an unowned reference when the closure and the instance it captures will always refer to each other, and will always be deallocated at the same time.</p>
+
+<p>Conversely, define a capture as a weak reference when the captured reference may become nil at some point in the future. Weak references are always of an optional type, and automatically become nil when the instance they reference is deallocated. This enables you to check for their existence within the closure’s body.</p>
+</blockquote>
+
+<p>根据苹果的官方文档的建议。当我们知道两个对象的生命周期并不相关，那么我们必须使用 <strong>weak</strong>。相反，非强引用对象拥有和强引用对象同样或者更长的生命周期的话，则应该使用 <strong>unowned</strong>。</p>
+
+<p>例如，<code>ViewControler</code> 对它的 <code>SubView</code> 的引用可以使用 <strong>unowned</strong>。因为 <code>ViewControler</code> 的生命周期一定比对它的 <code>SubView</code> 长。</p>
+
+<p>而在使用服务时，则需要看情况使用 <strong>weak</strong>。因为服务的初始化方法可能是被工厂模式或 <strong>Service Locator</strong> 所封装。这些服务可能在某些时候被重构为单例，此时它们的生命周期发生了改变。</p>
+
+<h2 id="toc_3">捕获列表</h2>
+
+<p>除了常用的 <strong>weak self</strong> 和 <strong>unowned self</strong> 之外，我们还可以使用<strong>捕获列表</strong>来打破闭包引用循环。将需要被捕获的变量，用 <strong>weak self</strong> 或 <strong>unowned self</strong> 标记。</p>
+
+<pre><code class="language-swift">someSingleton.closure { [weak portrait] in
+    print(portrait)
+}
+
+/* 或者 */
+
+someSingleton.closure { [unowned portrait] in
+    print(portrait)
+}
+</code></pre>
+
+<p><strong>捕获列表</strong>也可以用来初始化新的变量</p>
+
+<pre><code class="language-swift">/* 由于 UIImageView(image: portrait) 返回 Optional 的值，
+而 unowned 不可以用来标示 Optional 的变量，
+所以在这里我们需要强制解包。 */
+
+someSingleton.closure { [unowned imageView = UIImageView(image: portrait)!] in
+    print(imageView)
+}
+
+/* 或者 */
+
+someSingleton.closure { [weak imageView = UIImageView(image: portrait)] in
+    print(imageView)
+}
+</code></pre>
+
+<p>此时编译器会给出警告。因为这些变量的作用域只在闭包内部。</p>
+
+<pre><code class="language-text">Instance will be immediately deallocated because variable &#39;imageView&#39; is &#39;unowned&#39;
+
+/* 或者 */
+
+Instance will be immediately deallocated because variable &#39;imageView&#39; is &#39;weak&#39;
+</code></pre>
+
+<blockquote>
+<p>参考：<a href="https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html">Automatic Reference Counting</a></p>
+</blockquote>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15841636525875.html" 
+          title="Next Post: Core Data 的 Delete Rule 详解">Core Data 的 Delete Rule 详解 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://avatars2.githubusercontent.com/u/19426763?s=460&u=94d51c871e5e1f3db4d841c28ff5437e139d1bb7&v=4" /></div>
+            
+                <h1>Zhu Ting Blog</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/WenslowZhu" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:wenslowzhu@icloud.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15841648059621.html">Swift 内存管理之 weak 与 unowned</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15841636525875.html">Core Data 的 Delete Rule 详解</a>
+			      </li>
+		     
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+
+
+
+  </body>
+</html>
