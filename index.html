@@ -98,6 +98,154 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15841670639825.html">
+                
+                  <h1>Swift - 通过协议 Protocol 共享代码</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p><img src="media/15841670639825/1374191-713f66491d9364f7.jpg" alt="1374191-713f66491d9364f7"/></p>
+
+<blockquote>
+<p>常用共享代码的方式有：继承、拓展和全局方法。今天笔者分享一种通过 Protocol 共享代码的技巧。</p>
+</blockquote>
+
+<h2 id="toc_0">准备工作</h2>
+
+<p>我们先构建一个类，一个结构体和一个枚举。它们都有一个 <code>String</code> 类型的属性 <code>name</code>。而且它们都有一个叫 <code>printName</code> 的方法，可以用来输出 <code>name</code>。</p>
+
+<pre><code class="language-swift">class PersonClass {
+    let name = &quot;David&quot;
+    
+    func printName(){
+        print(name)
+    }
+}
+
+struct PersonStruct {
+    let name = &quot;David&quot;
+    
+    func printName(){
+        print(name)
+    }
+}
+
+enum PersonEnum {
+    var name: String {
+        return &quot;David&quot;
+    }
+    
+    case someone
+    
+    func printName() {
+        print(name)
+    }
+}
+</code></pre>
+
+<p>因为 <code>PersonClass</code> ， <code>PersonStruct</code> 和 <code>PersonEnum</code> 的 <code>printName</code> 方法所做的业务是一模一样的，所以把这方法抽离出来放在一个统一的地方，会更方便维护和拓展。</p>
+
+<h2 id="toc_1">构建协议</h2>
+
+<p>我们先构建一个名为 <code>PrintNameProtocol</code> 的协议。在这个协议里我们定义一个 <code>String</code> 类型的接口 <code>name</code>。并在拓展中添加一个具体的实现方法 <code>printName</code>。</p>
+
+<pre><code class="language-swift">protocol PrintNameProtocol {
+    var name: String { get }
+}
+
+extension PrintNameProtocol {
+    func printName() {
+        print(name)
+    }
+}
+</code></pre>
+
+<p>接着我们让 <code>PersonClass</code>，<code>PersonStruct</code> 和 <code>PersonEnum</code>  去实现这个协议。</p>
+
+<pre><code class="language-swift">class PersonClass: PrintNameProtocol {
+    let name = &quot;David&quot;
+}
+
+struct PersonStruct: PrintNameProtocol {
+    let name = &quot;David&quot;
+}
+
+enum PersonEnum: PrintNameProtocol {
+    var name: String {
+        return &quot;David&quot;
+    }
+    
+    case someone
+}
+</code></pre>
+
+<p>因为 <code>PersonClass</code>，<code>PersonStruct</code> 和 <code>PersonEnum</code> 都有 <code>String</code> 类型的属性 <code>name</code>，所以它们都是实现了 <code>PrintNameProtocol</code> 所定义的接口的。接着，我们删除 <code>printName</code> 方法，因为这个方法已经在 <code>PrintNameProtocol</code> 中实现了。</p>
+
+<h2 id="toc_2">使用共享代码</h2>
+
+<p>接着我们初始化一个 <code>personClass</code> 类对象，一个<code>personStruct</code> 结构体和一个枚举 <code>personEnum</code>。并调用一下 <code>printName</code> 方法。</p>
+
+<pre><code class="language-swift">let personClass = PersonClass()
+let personStruct = PersonStruct()
+let personEnum = PersonEnum.someone
+
+personClass.printName()
+personStruct.printName()
+personEnum.printName()
+</code></pre>
+
+<p>控制台输出：</p>
+
+<pre><code class="language-swift">David
+David
+David
+</code></pre>
+
+<h2 id="toc_3">拓展共享代码</h2>
+
+<p>下面我们再拓展一下 <code>printName</code> 这个方法。</p>
+
+<pre><code class="language-swift">extension PrintNameProtocol {
+    func printName() {
+        print(&quot;Hello! My name is \(name)&quot;)
+    }
+}
+</code></pre>
+
+<p>重新运行代码后，控制台输出：</p>
+
+<pre><code class="language-swift">Hello! My name is David
+Hello! My name is David
+Hello! My name is David
+</code></pre>
+
+<h2 id="toc_4">小结</h2>
+
+<p>通过拓展协议，我们实现了在类、结构体和枚举中共享代码。这种方式比继承更为灵活和强大。这种共享的方式也方便我们去维护和拓展某些业务代码。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/03/14</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15841648059621.html">
                 
                   <h1>Swift 内存管理之 weak 与 unowned</h1>
@@ -232,6 +380,12 @@
                 <div class="side-content">
                 <ul class="posts-list">
 	      
+		      
+			      <li class="post">
+			        <a href="15841670639825.html">Swift - 通过协议 Protocol 共享代码</a>
+			      </li>
+		     
+		  
 		      
 			      <li class="post">
 			        <a href="15841648059621.html">Swift 内存管理之 weak 与 unowned</a>
