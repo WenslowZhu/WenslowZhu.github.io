@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Hello World - 
+  Core Data 的 Delete Rule 详解 - 
   
   </title>
  <meta name="description" content="">
@@ -70,13 +70,47 @@
             <div class="large-9 medium-9 columns">
 
  <div class="markdown-body">
-<h1>Hello World</h1>
+<h1>Core Data 的 Delete Rule 详解</h1>
 
-<ul>
-<li>I&#39;m hosted with GitHub Pages.</li>
-</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1374191-1df5dd48c1de988c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""/></p>
 
-<p>export https_proxy=<a href="http://127.0.0.1:7890">http://127.0.0.1:7890</a> http_proxy=<a href="http://127.0.0.1:7890">http://127.0.0.1:7890</a> all_proxy=socks5://127.0.0.1:7891</p>
+<blockquote>
+<p><strong>Core Data</strong> 是苹果原生自带的数据库管理框架，功能强大但使用起来也很复杂。</p>
+</blockquote>
+
+<p>在配置 <strong>Core Data</strong> 的 <strong>relationship</strong> 时有一个属性叫 <strong>Delete Rule</strong>。<strong>Delete Rule</strong> 表明了数据对象在被删除时，和他有 <strong>relationship</strong> 的其他数据对象的处理规则。</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2019/4/20/16a39e3c6a4ef1d2?w=538&amp;h=558&amp;f=png&amp;s=148770" alt="Delete Rule"/></p>
+
+<h2 id="toc_0">Deny</h2>
+
+<p>除非有 <strong>relationship</strong> 的其他数据对象全部被删除，否则该数据对象将无法被删除。</p>
+
+<blockquote>
+<p>你在撤销一个事业部门前，需要先将部门员工全部 fire。</p>
+</blockquote>
+
+<h2 id="toc_1">Cascade</h2>
+
+<p>当你删除一个数据对象时，有 <strong>relationship</strong> 的其他数据对象将一并被自动删除。</p>
+
+<blockquote>
+<p>你撤销了一个事业部门，该部门的员工在同一时间一并被 fire 。</p>
+</blockquote>
+
+<h2 id="toc_2">Nullify</h2>
+
+<p>当你删除一个数据对象时，有 <strong>relationship</strong> 的其他数据对象的 <strong>relationship</strong> 指针将被设置为 <strong>null</strong>。</p>
+
+<p>只有当 <strong>relationship</strong> 是 <strong>Optional</strong> 时，该设置才是有意义的。否则，你必须在删除前，为有 <strong>relationship</strong> 的数据对象手动设置新的 <strong>relationship</strong>。</p>
+
+<h2 id="toc_3">No Action</h2>
+
+<p>正如其名。在删除时，不做对 <strong>relationship</strong> 任何操作。</p>
+
+<p><strong>注意</strong>⚠️</p>
+
+<p>当你使用这种删除规则时，所有的 <strong>relationship</strong> 都需要你手动管理。 </p>
 
 
 </div>
