@@ -4,7 +4,7 @@
   <title><![CDATA[Zhu Ting Blog]]></title>
   <link href="https://wenslowzhu.github.io/atom.xml" rel="self"/>
   <link href="https://wenslowzhu.github.io/"/>
-  <updated>2020-03-14T14:21:55+08:00</updated>
+  <updated>2020-03-14T14:25:14+08:00</updated>
   <id>https://wenslowzhu.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -20,9 +20,9 @@
     <content type="html"><![CDATA[
 <p><img src="media/15841670639825/1374191-713f66491d9364f7.jpg" alt="1374191-713f66491d9364f7"/></p>
 
-<blockquote>
 <p>常用共享代码的方式有：继承、拓展和全局方法。今天笔者分享一种通过 Protocol 共享代码的技巧。</p>
-</blockquote>
+
+<span id="more"></span><!-- more -->
 
 <h2 id="toc_0">准备工作</h2>
 
