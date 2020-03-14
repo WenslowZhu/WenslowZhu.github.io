@@ -4,7 +4,7 @@
   <title><![CDATA[Zhu Ting Blog]]></title>
   <link href="https://wenslowzhu.github.io/atom.xml" rel="self"/>
   <link href="https://wenslowzhu.github.io/"/>
-  <updated>2020-03-14T14:15:47+08:00</updated>
+  <updated>2020-03-14T14:21:38+08:00</updated>
   <id>https://wenslowzhu.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -18,7 +18,7 @@
     <updated>2020-03-14T13:46:45+08:00</updated>
     <id>https://wenslowzhu.github.io/15841648059621.html</id>
     <content type="html"><![CDATA[
-<p><img src="https://upload-images.jianshu.io/upload_images/1374191-d95813de95a5db93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""/></p>
+<p><img src="media/15841648059621/1374191-d95813de95a5db93.jpg" alt="1374191-d95813de95a5db93"/></p>
 
 <p>在用 Swift 做开发时，我们可以使用 <strong>weak</strong> 或是 <strong>unowned</strong> 打破类实例和闭包的强引用循环。今天我们来聊一聊 <strong>weak</strong> 和 <strong>unowned</strong> 的相同和不同之处。</p>
 
@@ -187,7 +187,7 @@ Instance will be immediately deallocated because variable &#39;imageView&#39; is
     <updated>2020-03-14T13:27:32+08:00</updated>
     <id>https://wenslowzhu.github.io/15841636525875.html</id>
     <content type="html"><![CDATA[
-<p><img src="https://upload-images.jianshu.io/upload_images/1374191-1df5dd48c1de988c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""/></p>
+<p><img src="media/15841636525875/1374191-1df5dd48c1de988c.jpg" alt="1374191-1df5dd48c1de988"/></p>
 
 <p><strong>Core Data</strong> 是苹果原生自带的数据库管理框架，功能强大但使用起来也很复杂。</p>
 
