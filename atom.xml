@@ -4,13 +4,119 @@
   <title><![CDATA[Zhu Ting Blog]]></title>
   <link href="https://wenslowzhu.github.io/atom.xml" rel="self"/>
   <link href="https://wenslowzhu.github.io/"/>
-  <updated>2020-03-14T21:47:49+08:00</updated>
+  <updated>2020-03-14T21:50:32+08:00</updated>
   <id>https://wenslowzhu.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[创建跨苹果平台的 Swift 框架]]></title>
+    <link href="https://wenslowzhu.github.io/15847997558803.html"/>
+    <updated>2020-03-21T22:09:15+08:00</updated>
+    <id>https://wenslowzhu.github.io/15847997558803.html</id>
+    <content type="html"><![CDATA[
+<p><img src="media/15847997558803/IMG_2952.jpg" alt="IMG_2952" style="width:400px;"/></p>
+
+<p>为了使代码更容易维护和部署，以及在 App 之间共享，可以将底层可复用的代码存放在独立的 Framework 中而不是 App 项目中。在这篇博客中，我们来学习如何通过 Xcode 来创建 Swift Framework，并使它可在 iOS，watchOS，tvOS 和 macOS App 中使用。</p>
+
+<span id="more"></span><!-- more -->
+
+<blockquote>
+<p>Xcode 版本 11.1<br/>
+Swift 版本 5.0</p>
+</blockquote>
+
+<h2 id="toc_0">1. 创建项目</h2>
+
+<p>创建一个名为 <strong>CrossPlatformSwiftModule</strong> 的 Xcode 项目，并选择 <strong>Cross-platform -&gt; Empty</strong></p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.30.18.png" alt="截屏2020-03-2123.30.18"/></p>
+
+<p>完成后的项目一览</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.33.56.png" alt="截屏2020-03-2123.33.56"/><br/>
+接着我们可以为不同平台创建 Target 了。以 iOS Target 为例。点击 ➕ 按钮，选择  <strong>iOS -&gt; Framework &amp; Library -&gt; Framework</strong>。Target 命名为 <strong>CrossPlatformSwiftModule_iOS</strong>。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.45.51.png" alt="截屏2020-03-2123.45.51"/></p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.49.39.png" alt="截屏2020-03-2123.49.39"/></p>
+
+<p>如法炮制，我们接着创建 watchOS，tvOS 和 macOS 的 Framework。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.56.48.png" alt="截屏2020-03-2123.56.48"/></p>
+
+<p>下一步，我们在项目中创建一个名为的 Sources 的空文件夹，它也是我们存放源代码的地方。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.04.05.png" alt="截屏2020-03-2200.04.05"/></p>
+
+<h2 id="toc_1">2. Info.plist 文件</h2>
+
+<p>我们将 iOS framework 文件夹下的 Info.plist 文件复制到 <strong>Sources/SupportingFiles</strong> 文件夹下。这个 Info.plist 会被所有平台共享。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.11.png" alt="截屏2020-03-2200.10.11"/></p>
+
+<p>在 <strong>Sources/SupportingFiles</strong> 文件夹上右键，并选择 <strong>Add Files</strong></p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.20.png" alt="截屏2020-03-2200.10.20"/></p>
+
+<p>选择添加刚刚复制过去的 Info.plist 文件。注意⚠️<strong>不要选中 Copy items if needed</strong>。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.11.01.png" alt="截屏2020-03-2200.11.01"/></p>
+
+<p>将各个 Framework 文件夹下的 Info.plist 文件删除。只保留 <strong>Sources/SupportingFiles</strong> 文件夹下的 Info.plist 文件。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.19.57.png" alt="截屏2020-03-2200.19.57"/></p>
+
+<p>接着在 Targets 中选中 CrossPlatformSwiftModule_iOS -&gt; Build Settings -&gt; Packaging -&gt; Info.plist File。将值更改为 Sources/SupportingFiles/Info.plist。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.23.33.png" alt="截屏2020-03-2200.23.33"/></p>
+
+<p>同样的，我们为另外的三个 Framework 也做同样的配置。完成设置后再确认一下，是否所有 Target 都能成功加载 Info 选项标签。</p>
+
+<h2 id="toc_2">3. Header Files</h2>
+
+<p>为了使 OC 项目可以成功桥接我们的 Swift Framework，我们还需要对 .h 文件做额外的设置。</p>
+
+<p>将 <strong>CrossPlatformSwiftModule_iOS</strong> 文件夹下的 <strong>CrossPlatformSwiftModule_iOS.h</strong> 文件拷贝到 Sources/SupportingFiles 中。并将拖入到 Xcode 的 Sources/SupportingFiles 文件夹中</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.50.18.png" alt="截屏2020-03-2210.50.18"/></p>
+
+<p>删除 <strong>CrossPlatformSwiftModule_iOS.h</strong> 文件里的所有 &quot;_iOS&quot;，并将该文件重命名为 <strong>CrossPlatformSwiftModule.h</strong>。选中 <strong>CrossPlatformSwiftModule.h</strong> 文件，将其勾选到所有 Target 中，并设置为 Public。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.52.54.png" alt="截屏2020-03-2210.52.54"/><br/>
+此时可以将项目中除 Sources 文件夹之外的其他文件夹全部删掉。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.56.52.png" alt="截屏2020-03-2210.56.52"/></p>
+
+<h2 id="toc_3">4. 添加代码</h2>
+
+<p>完善上述的所有设置之后，我们终于可以开始添加代码了。尝试着新建一个代码文件吧。记得添加代码时，要勾选上所有 Target。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.58.47.png" alt="截屏2020-03-2210.58.47"/></p>
+
+<h2 id="toc_4">5. 在代码层面适配多平台</h2>
+
+<p>不同的平台使用不同的系统框架，所以我们要为不同的平台 import 不同的系统框架。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.09.17.png" alt="截屏2020-03-2211.09.17"/></p>
+
+<p>除了可以 import 不同的系统框架，我们可能还需要自定义跨平台的数据类型。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.12.40.png" alt="截屏2020-03-2211.12.40"/></p>
+
+<p>这样设置后，我们自定义的 <strong>ImageType</strong> 类型就可以跨平台使用了。</p>
+
+<h2 id="toc_5">小结</h2>
+
+<p>相信现在你已经掌握了如何创建跨平台的 Swift Framework。通过上述的方法，可以将一套代码部署到多个平台，方便省事😉。</p>
+
+<p><a href="https://github.com/WenslowZhu/CrossPlatformSwiftModule">Demo 的 Github 地址</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Swift - 通过协议 Protocol 共享代码]]></title>
@@ -317,11 +423,9 @@ Instance will be immediately deallocated because variable &#39;imageView&#39; is
     <content type="html"><![CDATA[
 <p><img src="media/15841636525875/1374191-1df5dd48c1de988c.jpg" alt="1374191-1df5dd48c1de988"/></p>
 
-<p><strong>Core Data</strong> 是苹果原生自带的数据库管理框架，功能强大但使用起来也很复杂。</p>
+<p>在配置 <strong>Core Data</strong> 的 <strong>relationship</strong> 时有一个属性叫 <strong>Delete Rule</strong>。<strong>Delete Rule</strong> 表明了数据对象在被删除时，和他有 <strong>relationship</strong> 的其他数据对象的处理规则。</p>
 
 <span id="more"></span><!-- more -->
-
-<p>在配置 <strong>Core Data</strong> 的 <strong>relationship</strong> 时有一个属性叫 <strong>Delete Rule</strong>。<strong>Delete Rule</strong> 表明了数据对象在被删除时，和他有 <strong>relationship</strong> 的其他数据对象的处理规则。</p>
 
 <p><img src="https://user-gold-cdn.xitu.io/2019/4/20/16a39e3c6a4ef1d2?w=538&amp;h=558&amp;f=png&amp;s=148770" alt="Delete Rule"/></p>
 

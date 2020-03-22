@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Swift - 通过协议 Protocol 共享代码 - Zhu Ting Blog
+  创建跨苹果平台的 Swift 框架 - Zhu Ting Blog
   
   </title>
   
@@ -98,10 +98,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>Swift - 通过协议 Protocol 共享代码</h1>
+          <h1>创建跨苹果平台的 Swift 框架</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2020/03/14</span>
+          <span class="date">2020/03/21</span>
 
           
            
@@ -116,124 +116,102 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p><img src="media/15841670639825/IMG_2944.jpg" alt="IMG_2944" style="width:400px;"/></p>
+      <p><img src="media/15847997558803/IMG_2952.jpg" alt="IMG_2952" style="width:400px;"/></p>
 
-<p>常用共享代码的方式有：继承、拓展和全局方法。今天笔者分享一种通过 Protocol 共享代码的技巧。</p>
+<p>为了使代码更容易维护和部署，以及在 App 之间共享，可以将底层可复用的代码存放在独立的 Framework 中而不是 App 项目中。在这篇博客中，我们来学习如何通过 Xcode 来创建 Swift Framework，并使它可在 iOS，watchOS，tvOS 和 macOS App 中使用。</p>
 
 <span id="more"></span><!-- more -->
 
-<h2 id="toc_0">准备工作</h2>
+<blockquote>
+<p>Xcode 版本 11.1<br/>
+Swift 版本 5.0</p>
+</blockquote>
 
-<p>我们先构建一个类，一个结构体和一个枚举。它们都有一个 <code>String</code> 类型的属性 <code>name</code>。而且它们都有一个叫 <code>printName</code> 的方法，可以用来输出 <code>name</code>。</p>
+<h2 id="toc_0">1. 创建项目</h2>
 
-<pre><code class="language-swift">class PersonClass {
-    let name = &quot;David&quot;
-    
-    func printName(){
-        print(name)
-    }
-}
+<p>创建一个名为 <strong>CrossPlatformSwiftModule</strong> 的 Xcode 项目，并选择 <strong>Cross-platform -&gt; Empty</strong></p>
 
-struct PersonStruct {
-    let name = &quot;David&quot;
-    
-    func printName(){
-        print(name)
-    }
-}
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.30.18.png" alt="截屏2020-03-2123.30.18"/></p>
 
-enum PersonEnum {
-    var name: String {
-        return &quot;David&quot;
-    }
-    
-    case someone
-    
-    func printName() {
-        print(name)
-    }
-}
-</code></pre>
+<p>完成后的项目一览</p>
 
-<p>因为 <code>PersonClass</code> ， <code>PersonStruct</code> 和 <code>PersonEnum</code> 的 <code>printName</code> 方法所做的业务是一模一样的，所以把这方法抽离出来放在一个统一的地方，会更方便维护和拓展。</p>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.33.56.png" alt="截屏2020-03-2123.33.56"/><br/>
+接着我们可以为不同平台创建 Target 了。以 iOS Target 为例。点击 ➕ 按钮，选择  <strong>iOS -&gt; Framework &amp; Library -&gt; Framework</strong>。Target 命名为 <strong>CrossPlatformSwiftModule_iOS</strong>。</p>
 
-<h2 id="toc_1">构建协议</h2>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.45.51.png" alt="截屏2020-03-2123.45.51"/></p>
 
-<p>我们先构建一个名为 <code>PrintNameProtocol</code> 的协议。在这个协议里我们定义一个 <code>String</code> 类型的接口 <code>name</code>。并在拓展中添加一个具体的实现方法 <code>printName</code>。</p>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.49.39.png" alt="截屏2020-03-2123.49.39"/></p>
 
-<pre><code class="language-swift">protocol PrintNameProtocol {
-    var name: String { get }
-}
+<p>如法炮制，我们接着创建 watchOS，tvOS 和 macOS 的 Framework。</p>
 
-extension PrintNameProtocol {
-    func printName() {
-        print(name)
-    }
-}
-</code></pre>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.56.48.png" alt="截屏2020-03-2123.56.48"/></p>
 
-<p>接着我们让 <code>PersonClass</code>，<code>PersonStruct</code> 和 <code>PersonEnum</code>  去实现这个协议。</p>
+<p>下一步，我们在项目中创建一个名为的 Sources 的空文件夹，它也是我们存放源代码的地方。</p>
 
-<pre><code class="language-swift">class PersonClass: PrintNameProtocol {
-    let name = &quot;David&quot;
-}
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.04.05.png" alt="截屏2020-03-2200.04.05"/></p>
 
-struct PersonStruct: PrintNameProtocol {
-    let name = &quot;David&quot;
-}
+<h2 id="toc_1">2. Info.plist 文件</h2>
 
-enum PersonEnum: PrintNameProtocol {
-    var name: String {
-        return &quot;David&quot;
-    }
-    
-    case someone
-}
-</code></pre>
+<p>我们将 iOS framework 文件夹下的 Info.plist 文件复制到 <strong>Sources/SupportingFiles</strong> 文件夹下。这个 Info.plist 会被所有平台共享。</p>
 
-<p>因为 <code>PersonClass</code>，<code>PersonStruct</code> 和 <code>PersonEnum</code> 都有 <code>String</code> 类型的属性 <code>name</code>，所以它们都是实现了 <code>PrintNameProtocol</code> 所定义的接口的。接着，我们删除 <code>printName</code> 方法，因为这个方法已经在 <code>PrintNameProtocol</code> 中实现了。</p>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.11.png" alt="截屏2020-03-2200.10.11"/></p>
 
-<h2 id="toc_2">使用共享代码</h2>
+<p>在 <strong>Sources/SupportingFiles</strong> 文件夹上右键，并选择 <strong>Add Files</strong></p>
 
-<p>接着我们初始化一个 <code>personClass</code> 类对象，一个<code>personStruct</code> 结构体和一个枚举 <code>personEnum</code>。并调用一下 <code>printName</code> 方法。</p>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.20.png" alt="截屏2020-03-2200.10.20"/></p>
 
-<pre><code class="language-swift">let personClass = PersonClass()
-let personStruct = PersonStruct()
-let personEnum = PersonEnum.someone
+<p>选择添加刚刚复制过去的 Info.plist 文件。注意⚠️<strong>不要选中 Copy items if needed</strong>。</p>
 
-personClass.printName()
-personStruct.printName()
-personEnum.printName()
-</code></pre>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.11.01.png" alt="截屏2020-03-2200.11.01"/></p>
 
-<p>控制台输出：</p>
+<p>将各个 Framework 文件夹下的 Info.plist 文件删除。只保留 <strong>Sources/SupportingFiles</strong> 文件夹下的 Info.plist 文件。</p>
 
-<pre><code class="language-swift">David
-David
-David
-</code></pre>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.19.57.png" alt="截屏2020-03-2200.19.57"/></p>
 
-<h2 id="toc_3">拓展共享代码</h2>
+<p>接着在 Targets 中选中 CrossPlatformSwiftModule_iOS -&gt; Build Settings -&gt; Packaging -&gt; Info.plist File。将值更改为 Sources/SupportingFiles/Info.plist。</p>
 
-<p>下面我们再拓展一下 <code>printName</code> 这个方法。</p>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.23.33.png" alt="截屏2020-03-2200.23.33"/></p>
 
-<pre><code class="language-swift">extension PrintNameProtocol {
-    func printName() {
-        print(&quot;Hello! My name is \(name)&quot;)
-    }
-}
-</code></pre>
+<p>同样的，我们为另外的三个 Framework 也做同样的配置。完成设置后再确认一下，是否所有 Target 都能成功加载 Info 选项标签。</p>
 
-<p>重新运行代码后，控制台输出：</p>
+<h2 id="toc_2">3. Header Files</h2>
 
-<pre><code class="language-swift">Hello! My name is David
-Hello! My name is David
-Hello! My name is David
-</code></pre>
+<p>为了使 OC 项目可以成功桥接我们的 Swift Framework，我们还需要对 .h 文件做额外的设置。</p>
 
-<h2 id="toc_4">小结</h2>
+<p>将 <strong>CrossPlatformSwiftModule_iOS</strong> 文件夹下的 <strong>CrossPlatformSwiftModule_iOS.h</strong> 文件拷贝到 Sources/SupportingFiles 中。并将拖入到 Xcode 的 Sources/SupportingFiles 文件夹中</p>
 
-<p>通过拓展协议，我们实现了在类、结构体和枚举中共享代码。这种方式比继承更为灵活和强大。这种共享的方式也方便我们去维护和拓展某些业务代码。</p>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.50.18.png" alt="截屏2020-03-2210.50.18"/></p>
+
+<p>删除 <strong>CrossPlatformSwiftModule_iOS.h</strong> 文件里的所有 &quot;_iOS&quot;，并将该文件重命名为 <strong>CrossPlatformSwiftModule.h</strong>。选中 <strong>CrossPlatformSwiftModule.h</strong> 文件，将其勾选到所有 Target 中，并设置为 Public。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.52.54.png" alt="截屏2020-03-2210.52.54"/><br/>
+此时可以将项目中除 Sources 文件夹之外的其他文件夹全部删掉。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.56.52.png" alt="截屏2020-03-2210.56.52"/></p>
+
+<h2 id="toc_3">4. 添加代码</h2>
+
+<p>完善上述的所有设置之后，我们终于可以开始添加代码了。尝试着新建一个代码文件吧。记得添加代码时，要勾选上所有 Target。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.58.47.png" alt="截屏2020-03-2210.58.47"/></p>
+
+<h2 id="toc_4">5. 在代码层面适配多平台</h2>
+
+<p>不同的平台使用不同的系统框架，所以我们要为不同的平台 import 不同的系统框架。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.09.17.png" alt="截屏2020-03-2211.09.17"/></p>
+
+<p>除了可以 import 不同的系统框架，我们可能还需要自定义跨平台的数据类型。</p>
+
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.12.40.png" alt="截屏2020-03-2211.12.40"/></p>
+
+<p>这样设置后，我们自定义的 <strong>ImageType</strong> 类型就可以跨平台使用了。</p>
+
+<h2 id="toc_5">小结</h2>
+
+<p>相信现在你已经掌握了如何创建跨平台的 Swift Framework。通过上述的方法，可以将一套代码部署到多个平台，方便省事😉。</p>
+
+<p><a href="https://github.com/WenslowZhu/CrossPlatformSwiftModule">Demo 的 Github 地址</a></p>
 
 
     
@@ -244,16 +222,13 @@ Hello! My name is David
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15847997558803.html" 
-          title="Previous Post: 创建跨苹果平台的 Swift 框架">&laquo; 创建跨苹果平台的 Swift 框架</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15841648059621.html" 
-          title="Next Post: Swift 内存管理之 weak 与 unowned">Swift 内存管理之 weak 与 unowned &raquo;</a>
+          <a  href="15841670639825.html" 
+          title="Next Post: Swift - 通过协议 Protocol 共享代码">Swift - 通过协议 Protocol 共享代码 &raquo;</a>
       
       </p>
         </div>
