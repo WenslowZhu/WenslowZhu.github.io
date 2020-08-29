@@ -2,12 +2,22 @@
    "webcredentials": {
        "apps": [    "D95XHVNG2Z.com.ford.fordownerapp.torqueap",
                     "D95XHVNG2Z.com.lincoln.clutchcn",
-                    "52ZRFR5T4M.com.tz-testPassword.CCView"]
+                    "52ZRFR5T4M.com.tz-testPassword.CCView",
+                    "52ZRFR5T4M.com.wz.ReviewMonitor",
+                    "52ZRFR5T4M.com.wz.ReviewMonitor.Clip"]
     },
     "applinks": {
         "apps": [],
         "details": [{
             "appID": "D95XHVNG2Z.com.ford.fordownerapp.torqueap",
+            "paths": ["*"]
+        },
+        {
+            "appID": "52ZRFR5T4M.com.wz.ReviewMonitor",
+            "paths": ["*"]
+        },
+        {
+            "appID": "52ZRFR5T4M.com.wz.ReviewMonitor.Clip",
             "paths": ["*"]
         }]
     }
