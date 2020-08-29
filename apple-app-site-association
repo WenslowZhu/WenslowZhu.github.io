@@ -1,10 +1,15 @@
 {
    "webcredentials": {
-       "apps": ["NUP7C5F5WD.com.wz.ReviewMonitor.Clip"]
+       "apps": ["NUP7C5F5WD.com.wz.ReviewMonitor",
+		"NUP7C5F5WD.com.wz.ReviewMonitor.Clip"]
     },
     "applinks": {
         "apps": [],
         "details": [{
+            "appID": "NUP7C5F5WD.com.wz.ReviewMonitor",
+            "paths": ["*"]
+        },
+	{
             "appID": "NUP7C5F5WD.com.wz.ReviewMonitor.Clip",
             "paths": ["*"]
         }]
