@@ -13,5 +13,8 @@
             "appID": "NUP7C5F5WD.com.wz.ReviewMonitor.Clip",
             "paths": ["*"]
         }]
+    },
+    "appclips": {
+        "apps": ["NUP7C5F5WD.com.wz.ReviewMonitor.Clip"]
     }
 }
