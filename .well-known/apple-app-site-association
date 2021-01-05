@@ -1,0 +1,15 @@
+{
+    "appclips": {
+        "apps": ["NUP7C5F5WD.com.wz.ReviewMonitor.Clip"]
+    },
+    "webcredentials": {
+       "apps": ["NUP7C5F5WD.com.wz.ReviewMonitor"]
+    },
+    "applinks": {
+        "apps": [],
+        "details": [{
+            "appID": "NUP7C5F5WD.com.wz.ReviewMonitor",
+            "paths": ["*"]
+        }]
+    }
+}
