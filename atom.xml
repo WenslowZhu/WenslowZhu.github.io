@@ -4,13 +4,14 @@
   <title><![CDATA[Zhu Ting Blog]]></title>
   <link href="https://wenslowzhu.github.io/atom.xml" rel="self"/>
   <link href="https://wenslowzhu.github.io/"/>
-  <updated>2020-03-14T21:50:32+08:00</updated>
+  <updated>2022-10-27T11:55:15+08:00</updated>
   <id>https://wenslowzhu.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.mweb.im/">MWeb</generator>
+  <generator uri="http://www.mweb.im">MWeb</generator>
+
   
   <entry>
     <title type="html"><![CDATA[创建跨苹果平台的 Swift 框架]]></title>
@@ -18,101 +19,56 @@
     <updated>2020-03-21T22:09:15+08:00</updated>
     <id>https://wenslowzhu.github.io/15847997558803.html</id>
     <content type="html"><![CDATA[
-<p><img src="media/15847997558803/IMG_2952.jpg" alt="IMG_2952" style="width:400px;"/></p>
-
+<p><img src="media/15847997558803/IMG_2952.jpg" alt="IMG_2952" style="width:400px;" /></p>
 <p>为了使代码更容易维护和部署，以及在 App 之间共享，可以将底层可复用的代码存放在独立的 Framework 中而不是 App 项目中。在这篇博客中，我们来学习如何通过 Xcode 来创建 Swift Framework，并使它可在 iOS，watchOS，tvOS 和 macOS App 中使用。</p>
-
 <span id="more"></span><!-- more -->
-
 <blockquote>
-<p>Xcode 版本 11.1<br/>
+<p>Xcode 版本 11.1<br />
 Swift 版本 5.0</p>
 </blockquote>
-
-<h2 id="toc_0">1. 创建项目</h2>
-
+<h2><a id="1%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 创建项目</h2>
 <p>创建一个名为 <strong>CrossPlatformSwiftModule</strong> 的 Xcode 项目，并选择 <strong>Cross-platform -&gt; Empty</strong></p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.30.18.png" alt="截屏2020-03-2123.30.18"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.30.18.png" alt="截屏2020-03-2123.30.18" /></p>
 <p>完成后的项目一览</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.33.56.png" alt="截屏2020-03-2123.33.56"/><br/>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.33.56.png" alt="截屏2020-03-2123.33.56" /><br />
 接着我们可以为不同平台创建 Target 了。以 iOS Target 为例。点击 ➕ 按钮，选择  <strong>iOS -&gt; Framework &amp; Library -&gt; Framework</strong>。Target 命名为 <strong>CrossPlatformSwiftModule_iOS</strong>。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.45.51.png" alt="截屏2020-03-2123.45.51"/></p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.49.39.png" alt="截屏2020-03-2123.49.39"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.45.51.png" alt="截屏2020-03-2123.45.51" /></p>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.49.39.png" alt="截屏2020-03-2123.49.39" /></p>
 <p>如法炮制，我们接着创建 watchOS，tvOS 和 macOS 的 Framework。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.56.48.png" alt="截屏2020-03-2123.56.48"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.56.48.png" alt="截屏2020-03-2123.56.48" /></p>
 <p>下一步，我们在项目中创建一个名为的 Sources 的空文件夹，它也是我们存放源代码的地方。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.04.05.png" alt="截屏2020-03-2200.04.05"/></p>
-
-<h2 id="toc_1">2. Info.plist 文件</h2>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.04.05.png" alt="截屏2020-03-2200.04.05" /></p>
+<h2><a id="2-info-plist%E6%96%87%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Info.plist 文件</h2>
 <p>我们将 iOS framework 文件夹下的 Info.plist 文件复制到 <strong>Sources/SupportingFiles</strong> 文件夹下。这个 Info.plist 会被所有平台共享。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.11.png" alt="截屏2020-03-2200.10.11"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.11.png" alt="截屏2020-03-2200.10.11" /></p>
 <p>在 <strong>Sources/SupportingFiles</strong> 文件夹上右键，并选择 <strong>Add Files</strong></p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.20.png" alt="截屏2020-03-2200.10.20"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.20.png" alt="截屏2020-03-2200.10.20" /></p>
 <p>选择添加刚刚复制过去的 Info.plist 文件。注意⚠️<strong>不要选中 Copy items if needed</strong>。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.11.01.png" alt="截屏2020-03-2200.11.01"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.11.01.png" alt="截屏2020-03-2200.11.01" /></p>
 <p>将各个 Framework 文件夹下的 Info.plist 文件删除。只保留 <strong>Sources/SupportingFiles</strong> 文件夹下的 Info.plist 文件。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.19.57.png" alt="截屏2020-03-2200.19.57"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.19.57.png" alt="截屏2020-03-2200.19.57" /></p>
 <p>接着在 Targets 中选中 CrossPlatformSwiftModule_iOS -&gt; Build Settings -&gt; Packaging -&gt; Info.plist File。将值更改为 Sources/SupportingFiles/Info.plist。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.23.33.png" alt="截屏2020-03-2200.23.33"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.23.33.png" alt="截屏2020-03-2200.23.33" /></p>
 <p>同样的，我们为另外的三个 Framework 也做同样的配置。完成设置后再确认一下，是否所有 Target 都能成功加载 Info 选项标签。</p>
-
-<h2 id="toc_2">3. Header Files</h2>
-
+<h2><a id="3-header-files" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Header Files</h2>
 <p>为了使 OC 项目可以成功桥接我们的 Swift Framework，我们还需要对 .h 文件做额外的设置。</p>
-
 <p>将 <strong>CrossPlatformSwiftModule_iOS</strong> 文件夹下的 <strong>CrossPlatformSwiftModule_iOS.h</strong> 文件拷贝到 Sources/SupportingFiles 中。并将拖入到 Xcode 的 Sources/SupportingFiles 文件夹中</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.50.18.png" alt="截屏2020-03-2210.50.18"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.50.18.png" alt="截屏2020-03-2210.50.18" /></p>
 <p>删除 <strong>CrossPlatformSwiftModule_iOS.h</strong> 文件里的所有 &quot;_iOS&quot;，并将该文件重命名为 <strong>CrossPlatformSwiftModule.h</strong>。选中 <strong>CrossPlatformSwiftModule.h</strong> 文件，将其勾选到所有 Target 中，并设置为 Public。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.52.54.png" alt="截屏2020-03-2210.52.54"/><br/>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.52.54.png" alt="截屏2020-03-2210.52.54" /><br />
 此时可以将项目中除 Sources 文件夹之外的其他文件夹全部删掉。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.56.52.png" alt="截屏2020-03-2210.56.52"/></p>
-
-<h2 id="toc_3">4. 添加代码</h2>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.56.52.png" alt="截屏2020-03-2210.56.52" /></p>
+<h2><a id="4%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. 添加代码</h2>
 <p>完善上述的所有设置之后，我们终于可以开始添加代码了。尝试着新建一个代码文件吧。记得添加代码时，要勾选上所有 Target。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.58.47.png" alt="截屏2020-03-2210.58.47"/></p>
-
-<h2 id="toc_4">5. 在代码层面适配多平台</h2>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.58.47.png" alt="截屏2020-03-2210.58.47" /></p>
+<h2><a id="5%E5%9C%A8%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E9%80%82%E9%85%8D%E5%A4%9A%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. 在代码层面适配多平台</h2>
 <p>不同的平台使用不同的系统框架，所以我们要为不同的平台 import 不同的系统框架。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.09.17.png" alt="截屏2020-03-2211.09.17"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.09.17.png" alt="截屏2020-03-2211.09.17" /></p>
 <p>除了可以 import 不同的系统框架，我们可能还需要自定义跨平台的数据类型。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.12.40.png" alt="截屏2020-03-2211.12.40"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.12.40.png" alt="截屏2020-03-2211.12.40" /></p>
 <p>这样设置后，我们自定义的 <strong>ImageType</strong> 类型就可以跨平台使用了。</p>
-
-<h2 id="toc_5">小结</h2>
-
+<h2><a id="%E5%B0%8F%E7%BB%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>小结</h2>
 <p>相信现在你已经掌握了如何创建跨平台的 Swift Framework。通过上述的方法，可以将一套代码部署到多个平台，方便省事😉。</p>
-
 <p><a href="https://github.com/WenslowZhu/CrossPlatformSwiftModule">Demo 的 Github 地址</a></p>
 
 ]]></content>
@@ -124,16 +80,11 @@ Swift 版本 5.0</p>
     <updated>2020-03-14T14:24:23+08:00</updated>
     <id>https://wenslowzhu.github.io/15841670639825.html</id>
     <content type="html"><![CDATA[
-<p><img src="media/15841670639825/IMG_2944.jpg" alt="IMG_2944" style="width:400px;"/></p>
-
+<p><img src="media/15841670639825/IMG_2944.jpg" alt="IMG_2944" style="width:400px;" /></p>
 <p>常用共享代码的方式有：继承、拓展和全局方法。今天笔者分享一种通过 Protocol 共享代码的技巧。</p>
-
 <span id="more"></span><!-- more -->
-
-<h2 id="toc_0">准备工作</h2>
-
+<h2><a id="%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>准备工作</h2>
 <p>我们先构建一个类，一个结构体和一个枚举。它们都有一个 <code>String</code> 类型的属性 <code>name</code>。而且它们都有一个叫 <code>printName</code> 的方法，可以用来输出 <code>name</code>。</p>
-
 <pre><code class="language-swift">class PersonClass {
     let name = &quot;David&quot;
     
@@ -162,13 +113,9 @@ enum PersonEnum {
     }
 }
 </code></pre>
-
 <p>因为 <code>PersonClass</code> ， <code>PersonStruct</code> 和 <code>PersonEnum</code> 的 <code>printName</code> 方法所做的业务是一模一样的，所以把这方法抽离出来放在一个统一的地方，会更方便维护和拓展。</p>
-
-<h2 id="toc_1">构建协议</h2>
-
+<h2><a id="%E6%9E%84%E5%BB%BA%E5%8D%8F%E8%AE%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>构建协议</h2>
 <p>我们先构建一个名为 <code>PrintNameProtocol</code> 的协议。在这个协议里我们定义一个 <code>String</code> 类型的接口 <code>name</code>。并在拓展中添加一个具体的实现方法 <code>printName</code>。</p>
-
 <pre><code class="language-swift">protocol PrintNameProtocol {
     var name: String { get }
 }
@@ -179,9 +126,7 @@ extension PrintNameProtocol {
     }
 }
 </code></pre>
-
 <p>接着我们让 <code>PersonClass</code>，<code>PersonStruct</code> 和 <code>PersonEnum</code>  去实现这个协议。</p>
-
 <pre><code class="language-swift">class PersonClass: PrintNameProtocol {
     let name = &quot;David&quot;
 }
@@ -198,13 +143,9 @@ enum PersonEnum: PrintNameProtocol {
     case someone
 }
 </code></pre>
-
 <p>因为 <code>PersonClass</code>，<code>PersonStruct</code> 和 <code>PersonEnum</code> 都有 <code>String</code> 类型的属性 <code>name</code>，所以它们都是实现了 <code>PrintNameProtocol</code> 所定义的接口的。接着，我们删除 <code>printName</code> 方法，因为这个方法已经在 <code>PrintNameProtocol</code> 中实现了。</p>
-
-<h2 id="toc_2">使用共享代码</h2>
-
+<h2><a id="%E4%BD%BF%E7%94%A8%E5%85%B1%E4%BA%AB%E4%BB%A3%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用共享代码</h2>
 <p>接着我们初始化一个 <code>personClass</code> 类对象，一个<code>personStruct</code> 结构体和一个枚举 <code>personEnum</code>。并调用一下 <code>printName</code> 方法。</p>
-
 <pre><code class="language-swift">let personClass = PersonClass()
 let personStruct = PersonStruct()
 let personEnum = PersonEnum.someone
@@ -213,34 +154,25 @@ personClass.printName()
 personStruct.printName()
 personEnum.printName()
 </code></pre>
-
 <p>控制台输出：</p>
-
 <pre><code class="language-swift">David
 David
 David
 </code></pre>
-
-<h2 id="toc_3">拓展共享代码</h2>
-
+<h2><a id="%E6%8B%93%E5%B1%95%E5%85%B1%E4%BA%AB%E4%BB%A3%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>拓展共享代码</h2>
 <p>下面我们再拓展一下 <code>printName</code> 这个方法。</p>
-
 <pre><code class="language-swift">extension PrintNameProtocol {
     func printName() {
         print(&quot;Hello! My name is \(name)&quot;)
     }
 }
 </code></pre>
-
 <p>重新运行代码后，控制台输出：</p>
-
 <pre><code class="language-swift">Hello! My name is David
 Hello! My name is David
 Hello! My name is David
 </code></pre>
-
-<h2 id="toc_4">小结</h2>
-
+<h2><a id="%E5%B0%8F%E7%BB%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>小结</h2>
 <p>通过拓展协议，我们实现了在类、结构体和枚举中共享代码。这种方式比继承更为灵活和强大。这种共享的方式也方便我们去维护和拓展某些业务代码。</p>
 
 ]]></content>
@@ -252,16 +184,11 @@ Hello! My name is David
     <updated>2020-03-14T13:46:45+08:00</updated>
     <id>https://wenslowzhu.github.io/15841648059621.html</id>
     <content type="html"><![CDATA[
-<p><img src="media/15841648059621/1374191-d95813de95a5db93.jpg" alt="1374191-d95813de95a5db93"/></p>
-
+<p><img src="media/15841648059621/1374191-d95813de95a5db93.jpg" alt="1374191-d95813de95a5db93" /></p>
 <p>在用 Swift 做开发时，我们可以使用 <strong>weak</strong> 或是 <strong>unowned</strong> 打破类实例和闭包的强引用循环。今天我们来聊一聊 <strong>weak</strong> 和 <strong>unowned</strong> 的相同和不同之处。</p>
-
 <span id="more"></span><!-- more -->
-
-<h2 id="toc_0">weak</h2>
-
+<h2><a id="weak" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>weak</h2>
 <p>日常开发中，我们经常会用 <strong>weak</strong> 来标记代理或者在闭包中使用它来避免引用循环。</p>
-
 <pre><code class="language-swift">weak var delegate: SomeDelegate?
 
 lazy var someClosure: () -&gt; Void = { [weak self] in
@@ -269,26 +196,18 @@ lazy var someClosure: () -&gt; Void = { [weak self] in
     self.balabala
 }
 </code></pre>
-
 <p>当我们赋值给一个被标记 <strong>weak</strong> 的变量时，它的引用计数不会被改变。而且当这个弱引用变量所引用的对象被释放时，这个变量将被自动设为 <strong>nil</strong>。<strong>这也是弱引用必须被声明为 Optional 的原因。</strong></p>
-
-<h2 id="toc_1">unowned</h2>
-
+<h2><a id="unowned" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>unowned</h2>
 <p>和 <strong>weak</strong> 相同，<strong>unowned</strong> 也可以在不增加引用计数的前提下，引用某个类实例。</p>
-
 <pre><code class="language-swift">unowned let someInstance: SomeClass
 
 lazy var someClosure: () -&gt; Void = { [unowned self] in
     self.balabala
 }
 </code></pre>
-
 <p>在使用 <strong>unowned</strong> 时，我们不需要将变量声明为 <strong>Optional</strong>。</p>
-
 <p>需要注意的是。对于被 <strong>unowned</strong> 标记的变量，即使它的原来引用已经被释放，它仍然会保持对被已经释放了的对象的一个 &quot;无效的&quot; 引用，它不是 <strong>Optional</strong> ，也不会被指向 <strong>nil</strong>。所以，当我们试图访问这样的 <strong>unowned</strong> 引用时，程序就会发生错误。</p>
-
 <p>我们看下边这段示例代码：</p>
-
 <pre><code class="language-swift">class SomeSingleton {
     
     static let share = SomeSingleton()
@@ -331,46 +250,32 @@ class ViewController: UIViewController {
     }
 }
 </code></pre>
-
 <p>在这里我们定义了一个单例，这个单例提供一个两秒之后触发的闭包。接着我们又在 <code>Person</code> 这个类中引用这个单例。最后，我们在 <code>ViewController</code> 中实例化一个 <code>Person</code> 对象，并在调用 <code>testClosure()</code> 方法后，将其设为 <strong>nil</strong>。</p>
-
 <p>在程序运行之后，我们观察控制台的 log。<code>person</code> 被 <code>denint</code> 后，控制台打印出了 <code>Person is deinited</code>。在两秒后，单例的闭包被触发，程序尝试访问 <code>person</code> 的 <code>name</code> 属性。由于 <code>person</code> 在此时已经是 <strong>nil</strong>，我们正在尝试读取一个已经被释放，但 <strong>unowned reference</strong> 还存在但对象。所以程序抛出了异常。</p>
-
-<pre><code class="language-text">Person is deinited
+<pre><code class="language-plain_text">Person is deinited
 Fatal error: Attempted to read an unowned reference but object 0x6000027b5bf0 was already deallocated2019-04-20
 </code></pre>
-
 <p>如果我们将 <code>[unowned self]</code> 替换为 <code>[weak self]</code>，再重新运行一遍程序。</p>
-
 <pre><code class="language-swift">someSingleton.closure { [weak self] in
     print(self?.name)
 }
 </code></pre>
-
 <p>观察控制台的log。在 <code>person</code> 被设置为 <strong>nil</strong> 两秒之后，单例闭包被触发。由于我们在闭包中使用了 <strong>weak</strong>，所以程序不会出错，<code>self?.name</code> 的值为 <strong>nil</strong>。</p>
-
-<pre><code class="language-text">Person is deinited
+<pre><code class="language-plain_text">Person is deinited
 nil
 </code></pre>
-
-<h2 id="toc_2">weak vs. unowned</h2>
-
+<h2><a id="weak-vs-unowned" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>weak vs. unowned</h2>
 <blockquote>
 <p>Define a capture in a closure as an unowned reference when the closure and the instance it captures will always refer to each other, and will always be deallocated at the same time.</p>
-
+</blockquote>
+<blockquote>
 <p>Conversely, define a capture as a weak reference when the captured reference may become nil at some point in the future. Weak references are always of an optional type, and automatically become nil when the instance they reference is deallocated. This enables you to check for their existence within the closure’s body.</p>
 </blockquote>
-
 <p>根据苹果的官方文档的建议。当我们知道两个对象的生命周期并不相关，那么我们必须使用 <strong>weak</strong>。相反，非强引用对象拥有和强引用对象同样或者更长的生命周期的话，则应该使用 <strong>unowned</strong>。</p>
-
 <p>例如，<code>ViewControler</code> 对它的 <code>SubView</code> 的引用可以使用 <strong>unowned</strong>。因为 <code>ViewControler</code> 的生命周期一定比对它的 <code>SubView</code> 长。</p>
-
 <p>而在使用服务时，则需要看情况使用 <strong>weak</strong>。因为服务的初始化方法可能是被工厂模式或 <strong>Service Locator</strong> 所封装。这些服务可能在某些时候被重构为单例，此时它们的生命周期发生了改变。</p>
-
-<h2 id="toc_3">捕获列表</h2>
-
+<h2><a id="%E6%8D%95%E8%8E%B7%E5%88%97%E8%A1%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>捕获列表</h2>
 <p>除了常用的 <strong>weak self</strong> 和 <strong>unowned self</strong> 之外，我们还可以使用<strong>捕获列表</strong>来打破闭包引用循环。将需要被捕获的变量，用 <strong>weak self</strong> 或 <strong>unowned self</strong> 标记。</p>
-
 <pre><code class="language-swift">someSingleton.closure { [weak portrait] in
     print(portrait)
 }
@@ -381,9 +286,7 @@ someSingleton.closure { [unowned portrait] in
     print(portrait)
 }
 </code></pre>
-
 <p><strong>捕获列表</strong>也可以用来初始化新的变量</p>
-
 <pre><code class="language-swift">/* 由于 UIImageView(image: portrait) 返回 Optional 的值，
 而 unowned 不可以用来标示 Optional 的变量，
 所以在这里我们需要强制解包。 */
@@ -398,16 +301,13 @@ someSingleton.closure { [weak imageView = UIImageView(image: portrait)] in
     print(imageView)
 }
 </code></pre>
-
 <p>此时编译器会给出警告。因为这些变量的作用域只在闭包内部。</p>
-
-<pre><code class="language-text">Instance will be immediately deallocated because variable &#39;imageView&#39; is &#39;unowned&#39;
+<pre><code class="language-plain_text">Instance will be immediately deallocated because variable 'imageView' is 'unowned'
 
 /* 或者 */
 
-Instance will be immediately deallocated because variable &#39;imageView&#39; is &#39;weak&#39;
+Instance will be immediately deallocated because variable 'imageView' is 'weak'
 </code></pre>
-
 <blockquote>
 <p>参考：<a href="https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html">Automatic Reference Counting</a></p>
 </blockquote>
@@ -421,43 +321,27 @@ Instance will be immediately deallocated because variable &#39;imageView&#39; is
     <updated>2020-03-14T13:27:32+08:00</updated>
     <id>https://wenslowzhu.github.io/15841636525875.html</id>
     <content type="html"><![CDATA[
-<p><img src="media/15841636525875/1374191-1df5dd48c1de988c.jpg" alt="1374191-1df5dd48c1de988"/></p>
-
+<p><img src="media/15841636525875/1374191-1df5dd48c1de988c.jpg" alt="1374191-1df5dd48c1de988" /></p>
 <p>在配置 <strong>Core Data</strong> 的 <strong>relationship</strong> 时有一个属性叫 <strong>Delete Rule</strong>。<strong>Delete Rule</strong> 表明了数据对象在被删除时，和他有 <strong>relationship</strong> 的其他数据对象的处理规则。</p>
-
 <span id="more"></span><!-- more -->
-
-<p><img src="https://user-gold-cdn.xitu.io/2019/4/20/16a39e3c6a4ef1d2?w=538&amp;h=558&amp;f=png&amp;s=148770" alt="Delete Rule"/></p>
-
-<h2 id="toc_0">Deny</h2>
-
+<p><img src="https://user-gold-cdn.xitu.io/2019/4/20/16a39e3c6a4ef1d2?w=538&amp;h=558&amp;f=png&amp;s=148770" alt="Delete Rule" /></p>
+<h2><a id="deny" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deny</h2>
 <p>除非有 <strong>relationship</strong> 的其他数据对象全部被删除，否则该数据对象将无法被删除。</p>
-
 <blockquote>
 <p>你在撤销一个事业部门前，需要先将部门员工全部 fire。</p>
 </blockquote>
-
-<h2 id="toc_1">Cascade</h2>
-
+<h2><a id="cascade" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cascade</h2>
 <p>当你删除一个数据对象时，有 <strong>relationship</strong> 的其他数据对象将一并被自动删除。</p>
-
 <blockquote>
 <p>你撤销了一个事业部门，该部门的员工在同一时间一并被 fire 。</p>
 </blockquote>
-
-<h2 id="toc_2">Nullify</h2>
-
+<h2><a id="nullify" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nullify</h2>
 <p>当你删除一个数据对象时，有 <strong>relationship</strong> 的其他数据对象的 <strong>relationship</strong> 指针将被设置为 <strong>null</strong>。</p>
-
 <p>只有当 <strong>relationship</strong> 是 <strong>Optional</strong> 时，该设置才是有意义的。否则，你必须在删除前，为有 <strong>relationship</strong> 的数据对象手动设置新的 <strong>relationship</strong>。</p>
-
-<h2 id="toc_3">No Action</h2>
-
+<h2><a id="no-action" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>No Action</h2>
 <p>正如其名。在删除时，不做对 <strong>relationship</strong> 任何操作。</p>
-
 <p><strong>注意</strong>⚠️</p>
-
-<p>当你使用这种删除规则时，所有的 <strong>relationship</strong> 都需要你手动管理。 </p>
+<p>当你使用这种删除规则时，所有的 <strong>relationship</strong> 都需要你手动管理。</p>
 
 ]]></content>
   </entry>

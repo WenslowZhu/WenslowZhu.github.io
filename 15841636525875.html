@@ -8,23 +8,17 @@
   Core Data 的 Delete Rule 详解 - Zhu Ting Blog
   
   </title>
-  
-  
-  <link href="atom.xml" rel="alternate" title="Zhu Ting Blog" type="application/atom+xml">
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="Zhu Ting Blog" type="application/atom+xml">
     <link rel="stylesheet" href="asset/css/foundation.min.css" />
     <link rel="stylesheet" href="asset/css/docs.css" />
+
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
-  <script src="asset/highlightjs/highlight.pack.js"></script>
-  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript">
-  function before_search(){
-    var searchVal = 'site:wenslowzhu.github.io ' + document.getElementById('search_input').value;
-    document.getElementById('search_q').value = searchVal;
-    return true;
-  }
-</script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
   </head>
   <body class="antialiased hide-extras">
     
@@ -34,32 +28,11 @@
 
 <nav class="top-bar docs-bar hide-for-small" data-topbar>
 
-
-  <section class="top-bar-section">
-  <div class="row">
-      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
-        <ul id="main-menu" class="left">
-        
-        <li id=""><a target="self" href="index.html">Home</a></li>
-        
-        <li id=""><a target="_self" href="archives.html">Archives</a></li>
-        
-        </ul>
-
-        <ul class="right" id="search-wrap">
-          <li>
-<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
-    <input type="hidden" id="search_q" name="q" value="" />
-    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
-</form>
-</li>
-          </ul>
-      </div></div>
-  </div>
-  </section>
+<div id="header">
+    <h1><a href="index.html">Zhu Ting Blog</a></h1>
+</div>
 
 </nav>
-
         <nav class="tab-bar show-for-small">
   <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
     <span> &nbsp; Zhu Ting Blog</span>
@@ -68,244 +41,127 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-        
-        <li><a target="self" href="index.html">Home</a></li>
-        
-        <li><a target="_self" href="archives.html">Archives</a></li>
-        
+      <li><a href="index.html">Home</a></li>
+      
 
-    <li><label>Categories</label></li>
-
-         
-
+      
       </ul>
     </aside>
 
 <a class="exit-off-canvas" href="#"></a>
 
-
         <section id="main-content" role="main" class="scroll-container">
-        
-       
 
- <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
-</script>
-<div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>Core Data 的 Delete Rule 详解</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2020/03/14</span>
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
 
-          
-           
-         
-          <span class="comments">
-            
+                    
 
-            
-          </span>
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
 
-        </div>
-      </div><!-- article -->
+ <div class="markdown-body">
+<h1>Core Data 的 Delete Rule 详解</h1>
 
-      <div class="article-content">
-      <p><img src="media/15841636525875/1374191-1df5dd48c1de988c.jpg" alt="1374191-1df5dd48c1de988"/></p>
-
+<p><img src="media/15841636525875/1374191-1df5dd48c1de988c.jpg" alt="1374191-1df5dd48c1de988" /></p>
 <p>在配置 <strong>Core Data</strong> 的 <strong>relationship</strong> 时有一个属性叫 <strong>Delete Rule</strong>。<strong>Delete Rule</strong> 表明了数据对象在被删除时，和他有 <strong>relationship</strong> 的其他数据对象的处理规则。</p>
-
 <span id="more"></span><!-- more -->
-
-<p><img src="https://user-gold-cdn.xitu.io/2019/4/20/16a39e3c6a4ef1d2?w=538&amp;h=558&amp;f=png&amp;s=148770" alt="Delete Rule"/></p>
-
-<h2 id="toc_0">Deny</h2>
-
+<p><img src="https://user-gold-cdn.xitu.io/2019/4/20/16a39e3c6a4ef1d2?w=538&amp;h=558&amp;f=png&amp;s=148770" alt="Delete Rule" /></p>
+<h2><a id="deny" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deny</h2>
 <p>除非有 <strong>relationship</strong> 的其他数据对象全部被删除，否则该数据对象将无法被删除。</p>
-
 <blockquote>
 <p>你在撤销一个事业部门前，需要先将部门员工全部 fire。</p>
 </blockquote>
-
-<h2 id="toc_1">Cascade</h2>
-
+<h2><a id="cascade" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cascade</h2>
 <p>当你删除一个数据对象时，有 <strong>relationship</strong> 的其他数据对象将一并被自动删除。</p>
-
 <blockquote>
 <p>你撤销了一个事业部门，该部门的员工在同一时间一并被 fire 。</p>
 </blockquote>
-
-<h2 id="toc_2">Nullify</h2>
-
+<h2><a id="nullify" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nullify</h2>
 <p>当你删除一个数据对象时，有 <strong>relationship</strong> 的其他数据对象的 <strong>relationship</strong> 指针将被设置为 <strong>null</strong>。</p>
-
 <p>只有当 <strong>relationship</strong> 是 <strong>Optional</strong> 时，该设置才是有意义的。否则，你必须在删除前，为有 <strong>relationship</strong> 的数据对象手动设置新的 <strong>relationship</strong>。</p>
-
-<h2 id="toc_3">No Action</h2>
-
+<h2><a id="no-action" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>No Action</h2>
 <p>正如其名。在删除时，不做对 <strong>relationship</strong> 任何操作。</p>
-
 <p><strong>注意</strong>⚠️</p>
-
-<p>当你使用这种删除规则时，所有的 <strong>relationship</strong> 都需要你手动管理。 </p>
-
-
-    
-
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="15841648059621.html" 
-          title="Previous Post: Swift 内存管理之 weak 与 unowned">&laquo; Swift 内存管理之 weak 与 unowned</a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
+<p>当你使用这种删除规则时，所有的 <strong>relationship</strong> 都需要你手动管理。</p>
 
 
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="15841648059621.html"  title="Previous Post: Swift 内存管理之 weak 与 unowned">&laquo; Swift 内存管理之 weak 与 unowned</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15841636525875.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
 
 
- <div class="large-4 medium-4 columns">
-  <div class="hide-for-small">
-    <div id="sidebar" class="sidebar">
-          <div id="site-info" class="site-info">
-            
-                <div class="site-a-logo"><img src="https://avatars2.githubusercontent.com/u/19426763?s=460&u=94d51c871e5e1f3db4d841c28ff5437e139d1bb7&v=4" /></div>
-            
-                <h1>Zhu Ting Blog</h1>
-                <div class="site-des"></div>
-                <div class="social">
-
-
-
-
-
-
-
-
-
-<a target="_blank" class="github" target="_blank" href="https://github.com/WenslowZhu" title="GitHub">GitHub</a>
-<a target="_blank" class="email" href="mailto:wenslowzhu@icloud.com" title="Email">Email</a>
-  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
-                
-              	 </div>
-          	</div>
-
-             
-
-              <div id="site-categories" class="side-item ">
-                <div class="side-header">
-                  <h2>Categories</h2>
-                </div>
-                <div class="side-content">
-
-      	<p class="cat-list">
-         
-        </p>
-
-
-                </div>
-              </div>
-
-              <div id="site-categories" class="side-item">
-                <div class="side-header">
-                  <h2>Recent Posts</h2>
-                </div>
-                <div class="side-content">
-                <ul class="posts-list">
-	      
-		      
-			      <li class="post">
-			        <a href="15847997558803.html">创建跨苹果平台的 Swift 框架</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15841670639825.html">Swift - 通过协议 Protocol 共享代码</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15841648059621.html">Swift 内存管理之 weak 与 unowned</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15841636525875.html">Core Data 的 Delete Rule 详解</a>
-			      </li>
-		     
-		   
-		  		</ul>
-                </div>
-              </div>
-        </div><!-- sidebar -->
-      </div><!-- hide for small -->
-</div><!-- large 4 -->
-
-</div><!-- row -->
-
- <div class="page-bottom clearfix">
+<div class="page-bottom">
   <div class="row">
-   <p class="copyright">Copyright &copy; 2015
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
 Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
 Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
   </div>
 </div>
 
         </section>
       </div>
     </div>
-
-  
     
-
+    
     <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
     <script>
       $(document).foundation();
-      function fixSidebarHeight(){
-        var w1 = $('.markdown-body').height();
-          var w2 = $('#sidebar').height();
-          if (w1 > w2) { $('#sidebar').height(w1); };
-      }
-      $(function(){
-        fixSidebarHeight();
-      })
-      $(window).load(function(){
-          fixSidebarHeight();
-      });
+
      
     </script>
-
     
-
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
   </body>
 </html>

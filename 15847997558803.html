@@ -8,23 +8,17 @@
   创建跨苹果平台的 Swift 框架 - Zhu Ting Blog
   
   </title>
-  
-  
-  <link href="atom.xml" rel="alternate" title="Zhu Ting Blog" type="application/atom+xml">
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="Zhu Ting Blog" type="application/atom+xml">
     <link rel="stylesheet" href="asset/css/foundation.min.css" />
     <link rel="stylesheet" href="asset/css/docs.css" />
+
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
-  <script src="asset/highlightjs/highlight.pack.js"></script>
-  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript">
-  function before_search(){
-    var searchVal = 'site:wenslowzhu.github.io ' + document.getElementById('search_input').value;
-    document.getElementById('search_q').value = searchVal;
-    return true;
-  }
-</script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
   </head>
   <body class="antialiased hide-extras">
     
@@ -34,32 +28,11 @@
 
 <nav class="top-bar docs-bar hide-for-small" data-topbar>
 
-
-  <section class="top-bar-section">
-  <div class="row">
-      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
-        <ul id="main-menu" class="left">
-        
-        <li id=""><a target="self" href="index.html">Home</a></li>
-        
-        <li id=""><a target="_self" href="archives.html">Archives</a></li>
-        
-        </ul>
-
-        <ul class="right" id="search-wrap">
-          <li>
-<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
-    <input type="hidden" id="search_q" name="q" value="" />
-    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
-</form>
-</li>
-          </ul>
-      </div></div>
-  </div>
-  </section>
+<div id="header">
+    <h1><a href="index.html">Zhu Ting Blog</a></h1>
+</div>
 
 </nav>
-
         <nav class="tab-bar show-for-small">
   <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
     <span> &nbsp; Zhu Ting Blog</span>
@@ -68,303 +41,158 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-        
-        <li><a target="self" href="index.html">Home</a></li>
-        
-        <li><a target="_self" href="archives.html">Archives</a></li>
-        
+      <li><a href="index.html">Home</a></li>
+      
 
-    <li><label>Categories</label></li>
-
-         
-
+      
       </ul>
     </aside>
 
 <a class="exit-off-canvas" href="#"></a>
 
-
         <section id="main-content" role="main" class="scroll-container">
-        
-       
 
- <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
-</script>
-<div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>创建跨苹果平台的 Swift 框架</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2020/03/21</span>
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
 
-          
-           
-         
-          <span class="comments">
-            
+                    
 
-            
-          </span>
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
 
-        </div>
-      </div><!-- article -->
+ <div class="markdown-body">
+<h1>创建跨苹果平台的 Swift 框架</h1>
 
-      <div class="article-content">
-      <p><img src="media/15847997558803/IMG_2952.jpg" alt="IMG_2952" style="width:400px;"/></p>
-
+<p><img src="media/15847997558803/IMG_2952.jpg" alt="IMG_2952" style="width:400px;" /></p>
 <p>为了使代码更容易维护和部署，以及在 App 之间共享，可以将底层可复用的代码存放在独立的 Framework 中而不是 App 项目中。在这篇博客中，我们来学习如何通过 Xcode 来创建 Swift Framework，并使它可在 iOS，watchOS，tvOS 和 macOS App 中使用。</p>
-
 <span id="more"></span><!-- more -->
-
 <blockquote>
-<p>Xcode 版本 11.1<br/>
+<p>Xcode 版本 11.1<br />
 Swift 版本 5.0</p>
 </blockquote>
-
-<h2 id="toc_0">1. 创建项目</h2>
-
+<h2><a id="1%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 创建项目</h2>
 <p>创建一个名为 <strong>CrossPlatformSwiftModule</strong> 的 Xcode 项目，并选择 <strong>Cross-platform -&gt; Empty</strong></p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.30.18.png" alt="截屏2020-03-2123.30.18"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.30.18.png" alt="截屏2020-03-2123.30.18" /></p>
 <p>完成后的项目一览</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.33.56.png" alt="截屏2020-03-2123.33.56"/><br/>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.33.56.png" alt="截屏2020-03-2123.33.56" /><br />
 接着我们可以为不同平台创建 Target 了。以 iOS Target 为例。点击 ➕ 按钮，选择  <strong>iOS -&gt; Framework &amp; Library -&gt; Framework</strong>。Target 命名为 <strong>CrossPlatformSwiftModule_iOS</strong>。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.45.51.png" alt="截屏2020-03-2123.45.51"/></p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.49.39.png" alt="截屏2020-03-2123.49.39"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.45.51.png" alt="截屏2020-03-2123.45.51" /></p>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.49.39.png" alt="截屏2020-03-2123.49.39" /></p>
 <p>如法炮制，我们接着创建 watchOS，tvOS 和 macOS 的 Framework。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.56.48.png" alt="截屏2020-03-2123.56.48"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2123.56.48.png" alt="截屏2020-03-2123.56.48" /></p>
 <p>下一步，我们在项目中创建一个名为的 Sources 的空文件夹，它也是我们存放源代码的地方。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.04.05.png" alt="截屏2020-03-2200.04.05"/></p>
-
-<h2 id="toc_1">2. Info.plist 文件</h2>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.04.05.png" alt="截屏2020-03-2200.04.05" /></p>
+<h2><a id="2-info-plist%E6%96%87%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Info.plist 文件</h2>
 <p>我们将 iOS framework 文件夹下的 Info.plist 文件复制到 <strong>Sources/SupportingFiles</strong> 文件夹下。这个 Info.plist 会被所有平台共享。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.11.png" alt="截屏2020-03-2200.10.11"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.11.png" alt="截屏2020-03-2200.10.11" /></p>
 <p>在 <strong>Sources/SupportingFiles</strong> 文件夹上右键，并选择 <strong>Add Files</strong></p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.20.png" alt="截屏2020-03-2200.10.20"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.10.20.png" alt="截屏2020-03-2200.10.20" /></p>
 <p>选择添加刚刚复制过去的 Info.plist 文件。注意⚠️<strong>不要选中 Copy items if needed</strong>。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.11.01.png" alt="截屏2020-03-2200.11.01"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.11.01.png" alt="截屏2020-03-2200.11.01" /></p>
 <p>将各个 Framework 文件夹下的 Info.plist 文件删除。只保留 <strong>Sources/SupportingFiles</strong> 文件夹下的 Info.plist 文件。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.19.57.png" alt="截屏2020-03-2200.19.57"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.19.57.png" alt="截屏2020-03-2200.19.57" /></p>
 <p>接着在 Targets 中选中 CrossPlatformSwiftModule_iOS -&gt; Build Settings -&gt; Packaging -&gt; Info.plist File。将值更改为 Sources/SupportingFiles/Info.plist。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.23.33.png" alt="截屏2020-03-2200.23.33"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2200.23.33.png" alt="截屏2020-03-2200.23.33" /></p>
 <p>同样的，我们为另外的三个 Framework 也做同样的配置。完成设置后再确认一下，是否所有 Target 都能成功加载 Info 选项标签。</p>
-
-<h2 id="toc_2">3. Header Files</h2>
-
+<h2><a id="3-header-files" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Header Files</h2>
 <p>为了使 OC 项目可以成功桥接我们的 Swift Framework，我们还需要对 .h 文件做额外的设置。</p>
-
 <p>将 <strong>CrossPlatformSwiftModule_iOS</strong> 文件夹下的 <strong>CrossPlatformSwiftModule_iOS.h</strong> 文件拷贝到 Sources/SupportingFiles 中。并将拖入到 Xcode 的 Sources/SupportingFiles 文件夹中</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.50.18.png" alt="截屏2020-03-2210.50.18"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.50.18.png" alt="截屏2020-03-2210.50.18" /></p>
 <p>删除 <strong>CrossPlatformSwiftModule_iOS.h</strong> 文件里的所有 &quot;_iOS&quot;，并将该文件重命名为 <strong>CrossPlatformSwiftModule.h</strong>。选中 <strong>CrossPlatformSwiftModule.h</strong> 文件，将其勾选到所有 Target 中，并设置为 Public。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.52.54.png" alt="截屏2020-03-2210.52.54"/><br/>
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.52.54.png" alt="截屏2020-03-2210.52.54" /><br />
 此时可以将项目中除 Sources 文件夹之外的其他文件夹全部删掉。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.56.52.png" alt="截屏2020-03-2210.56.52"/></p>
-
-<h2 id="toc_3">4. 添加代码</h2>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.56.52.png" alt="截屏2020-03-2210.56.52" /></p>
+<h2><a id="4%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. 添加代码</h2>
 <p>完善上述的所有设置之后，我们终于可以开始添加代码了。尝试着新建一个代码文件吧。记得添加代码时，要勾选上所有 Target。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.58.47.png" alt="截屏2020-03-2210.58.47"/></p>
-
-<h2 id="toc_4">5. 在代码层面适配多平台</h2>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2210.58.47.png" alt="截屏2020-03-2210.58.47" /></p>
+<h2><a id="5%E5%9C%A8%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%E9%80%82%E9%85%8D%E5%A4%9A%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. 在代码层面适配多平台</h2>
 <p>不同的平台使用不同的系统框架，所以我们要为不同的平台 import 不同的系统框架。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.09.17.png" alt="截屏2020-03-2211.09.17"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.09.17.png" alt="截屏2020-03-2211.09.17" /></p>
 <p>除了可以 import 不同的系统框架，我们可能还需要自定义跨平台的数据类型。</p>
-
-<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.12.40.png" alt="截屏2020-03-2211.12.40"/></p>
-
+<p><img src="media/15847997558803/%E6%88%AA%E5%B1%8F2020-03-2211.12.40.png" alt="截屏2020-03-2211.12.40" /></p>
 <p>这样设置后，我们自定义的 <strong>ImageType</strong> 类型就可以跨平台使用了。</p>
-
-<h2 id="toc_5">小结</h2>
-
+<h2><a id="%E5%B0%8F%E7%BB%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>小结</h2>
 <p>相信现在你已经掌握了如何创建跨平台的 Swift Framework。通过上述的方法，可以将一套代码部署到多个平台，方便省事😉。</p>
-
 <p><a href="https://github.com/WenslowZhu/CrossPlatformSwiftModule">Demo 的 Github 地址</a></p>
 
 
-    
+</div>
 
-      </div>
+<br /><br />
+<hr />
 
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="15841670639825.html" 
-          title="Next Post: Swift - 通过协议 Protocol 共享代码">Swift - 通过协议 Protocol 共享代码 &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="15841670639825.html" 
+	        title="Next Post: Swift - 通过协议 Protocol 共享代码">Swift - 通过协议 Protocol 共享代码 &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
-          
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
-
-
-
-
- <div class="large-4 medium-4 columns">
-  <div class="hide-for-small">
-    <div id="sidebar" class="sidebar">
-          <div id="site-info" class="site-info">
-            
-                <div class="site-a-logo"><img src="https://avatars2.githubusercontent.com/u/19426763?s=460&u=94d51c871e5e1f3db4d841c28ff5437e139d1bb7&v=4" /></div>
-            
-                <h1>Zhu Ting Blog</h1>
-                <div class="site-des"></div>
-                <div class="social">
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15847997558803.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
 
 
-
-
-
-
-
-
-
-<a target="_blank" class="github" target="_blank" href="https://github.com/WenslowZhu" title="GitHub">GitHub</a>
-<a target="_blank" class="email" href="mailto:wenslowzhu@icloud.com" title="Email">Email</a>
-  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
-                
-              	 </div>
-          	</div>
-
-             
-
-              <div id="site-categories" class="side-item ">
-                <div class="side-header">
-                  <h2>Categories</h2>
-                </div>
-                <div class="side-content">
-
-      	<p class="cat-list">
-         
-        </p>
-
-
-                </div>
-              </div>
-
-              <div id="site-categories" class="side-item">
-                <div class="side-header">
-                  <h2>Recent Posts</h2>
-                </div>
-                <div class="side-content">
-                <ul class="posts-list">
-	      
-		      
-			      <li class="post">
-			        <a href="15847997558803.html">创建跨苹果平台的 Swift 框架</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15841670639825.html">Swift - 通过协议 Protocol 共享代码</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15841648059621.html">Swift 内存管理之 weak 与 unowned</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15841636525875.html">Core Data 的 Delete Rule 详解</a>
-			      </li>
-		     
-		   
-		  		</ul>
-                </div>
-              </div>
-        </div><!-- sidebar -->
-      </div><!-- hide for small -->
-</div><!-- large 4 -->
-
-</div><!-- row -->
-
- <div class="page-bottom clearfix">
+<div class="page-bottom">
   <div class="row">
-   <p class="copyright">Copyright &copy; 2015
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
 Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
 Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
   </div>
 </div>
 
         </section>
       </div>
     </div>
-
-  
     
-
+    
     <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
     <script>
       $(document).foundation();
-      function fixSidebarHeight(){
-        var w1 = $('.markdown-body').height();
-          var w2 = $('#sidebar').height();
-          if (w1 > w2) { $('#sidebar').height(w1); };
-      }
-      $(function(){
-        fixSidebarHeight();
-      })
-      $(window).load(function(){
-          fixSidebarHeight();
-      });
+
      
     </script>
-
     
-
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
   </body>
 </html>
